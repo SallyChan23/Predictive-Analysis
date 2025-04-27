@@ -1,20 +1,27 @@
-# Judul Proyek
-Prediksi Nilai Matematika Siswa Menggunakan Machine Learning
+# Laporan Proyek Machine Learning - Jeselyn Tania
 
-# Identitas
-**Nama**: Jeselyn Tania  
-**Platform**: Kaggle Notebook  
-
-# Pendahuluan
+## Domain Proyek
 Kemampuan numerasi merupakan indikator penting dalam pendidikan. Nilai matematika menjadi salah satu tolok ukur utama untuk menilai prestasi akademik siswa. Banyak faktor yang dapat memengaruhi hasil nilai matematika, mulai dari kemampuan literasi hingga latar belakang sosial. Dengan menerapkan machine learning, kita dapat memprediksi nilai matematika siswa berdasarkan faktor-faktor tersebut dan memahami hubungan antar fitur yang memengaruhi performa akademik.
 
-# Business Understanding
-Proyek ini bertujuan untuk membangun model prediktif yang dapat membantu institusi pendidikan dalam:
-- Mengidentifikasi siswa yang berpotensi memiliki nilai matematika rendah
-- Mengambil tindakan intervensi lebih awal
-- Memahami faktor apa yang paling memengaruhi nilai matematika siswa
+Referensi:
+- [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams)
 
-# Data Understanding
+## Business Understanding
+
+### Problem Statements
+- Bagaimana memprediksi nilai matematika siswa berdasarkan data demografis dan nilai akademik lainnya?
+- Apa faktor utama yang mempengaruhi nilai matematika siswa?
+
+### Goals
+- Membangun model machine learning untuk memprediksi nilai matematika siswa.
+- Mengidentifikasi fitur yang paling berpengaruh terhadap prediksi nilai matematika.
+
+### Solution Statements
+- Membangun baseline model menggunakan **Linear Regression**.
+- Meningkatkan performa dengan model **Random Forest Regressor** dan melakukan **Hyperparameter Tuning**.
+- Model dievaluasi menggunakan MAE, RMSE, dan R² Score untuk menentukan model terbaik.
+
+## Data Understanding
 Dataset digunakan dari Kaggle: [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams), berisi data 1000 siswa dengan fitur:
 - gender
 - race/ethnicity
@@ -24,31 +31,29 @@ Dataset digunakan dari Kaggle: [Students Performance in Exams](https://www.kaggl
 - reading score
 - writing score
 - math score (target)
----
-Catatan tambahan:
-Tidak terdapat missing value maupun duplikat pada dataset.
 
-# Data Preparation
-- **Encoding**: Semua fitur kategorikal (gender, race, dll) diubah menjadi numerik menggunakan LabelEncoder.
+Catatan tambahan:
+- Tidak terdapat missing value maupun duplikat pada dataset.
+
+## Data Preparation
+- **Encoding**: Semua fitur kategorikal diubah menjadi numerik menggunakan LabelEncoder.
 - **Feature Scaling**: Dilakukan StandardScaler pada fitur numerik untuk optimasi performa model berbasis regresi.
 - **Train-Test Split**: Data dibagi menjadi 80% data pelatihan dan 20% data pengujian.
 
----
+## Modeling
+Dua model yang digunakan:
+- **Linear Regression** sebagai baseline model.
+- **Random Forest Regressor** dengan **GridSearchCV** untuk hyperparameter tuning.
 
-## Solution Statement
+### Model Selection
+Berdasarkan hasil evaluasi, **Random Forest Regressor** dipilih sebagai model terbaik karena:
+- MAE dan RMSE lebih rendah dibandingkan Linear Regression.
+- R² Score cukup tinggi dan stabil.
+- Random Forest lebih fleksibel dalam menangani hubungan non-linear antar fitur.
 
-Untuk mencapai hasil prediksi yang optimal, proyek ini menggunakan dua pendekatan model:
+## Evaluation
 
-1. **Baseline Model: Linear Regression**  
-   Model sederhana digunakan sebagai acuan awal performa prediksi.
-
-2. **Random Forest Regressor dengan Hyperparameter Tuning**  
-   Model ensembel yang memperbaiki performa prediksi dengan menggabungkan banyak pohon keputusan.
-
-Semua model dievaluasi menggunakan metrik MAE, RMSE, dan R² Score untuk memilih model terbaik.
-
-
-# Evaluation
+### Hasil Evaluasi Model:
 
 | Model                 | MAE   | RMSE  | R²    |
 |----------------------|--------|--------|-------|
@@ -56,62 +61,45 @@ Semua model dievaluasi menggunakan metrik MAE, RMSE, dan R² Score untuk memilih
 | Random Forest         | 4.71  | 6.06  | 0.85 |
 | Tuned Random Forest   | 4.69  | 6.04  | 0.85 |
 
-> Dari kedua model ini, akan dipilih Random Forest algorithm, karena hasil evaluasi menunjukkan angka lebih baik dibanding Linear Regression
-> Dari hasil tersebut dengan adanya tuning menjadi lebih baik, walau hanya sedikit. Dapat ditunjukkan dari hasil RMSE nya dari 6.06 menjadi 6.04
+> Random Forest setelah tuning menghasilkan RMSE yang sedikit lebih baik dibandingkan sebelum tuning.
 
-## Model Selection
+### Visualisasi Hasil Prediksi:
 
-Berdasarkan hasil evaluasi yang telah dilakukan, **Random Forest Regressor** dipilih sebagai model terbaik karena:
+![Scatter Plot Prediksi vs Aktual](https://github.com/user-attachments/assets/51c97a42-3c1f-4bf6-b3b5-066406123c71)
 
-- **MAE** dan **RMSE** yang dihasilkan lebih rendah dibandingkan Linear Regression.
-- **R² Score** dari Random Forest cukup tinggi dan stabil, menandakan model mampu menjelaskan variansi data dengan baik.
-- Random Forest juga memiliki keunggulan dalam menangani hubungan non-linear antar fitur.
+> Hasil scatter plot menunjukkan prediksi cukup baik, dengan sebagian besar titik dekat garis ideal. Outlier terlihat sedikit menyebar.
 
-Dengan mempertimbangkan hasil evaluasi metrik, **Random Forest Regressor** menjadi model final yang digunakan dalam proyek ini.
+### Feature Importance:
 
-**Hasil Visualisasi dengan Scatter Plot (Menggunakan Random Forest Setelah Tuning**
+![Feature Importance](https://github.com/user-attachments/assets/e093f823-5d07-4fd6-8cd1-4634577a99cf)
 
-![image](https://github.com/user-attachments/assets/51c97a42-3c1f-4bf6-b3b5-066406123c71)
+> Fitur `reading score` dan `writing score` memiliki kontribusi tertinggi terhadap prediksi nilai matematika.
 
-> Hasil scatter plot menunjukkan model dapat mempredeksi nilai matematika dengan cukup baik ditunjukkan oleh titik yang berada pada garis merah dan hanya beberapa titik saja yang diluar dari garis merah tersebut (ini bisa disebabkan oleh outliers).
-
-![image](https://github.com/user-attachments/assets/e093f823-5d07-4fd6-8cd1-4634577a99cf)
-> Dari hasil visualisasi tersebut, fitur `reading score` dan `writing score` memiliki feature importance tertinggi, menunjukkan literasi siswa sangat berpengaruh pada kemampuan numerik.
-
-## Evaluation Metrics Explanation
-
-Model dievaluasi menggunakan tiga metrik utama:
+### Evaluation Metrics Explanation
 
 - **Mean Absolute Error (MAE):**  
   Mengukur rata-rata absolut selisih antara nilai aktual dan nilai prediksi.  
-  Formula:  
   \[
   MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
-  \]  
-  Semakin kecil MAE, semakin baik performa model.
+  \]
 
 - **Root Mean Squared Error (RMSE):**  
-  Menghitung akar dari rata-rata kuadrat error. Lebih sensitif terhadap outlier dibandingkan MAE.  
-  Formula:  
+  Menghitung akar dari rata-rata kuadrat error.  
   \[
   RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
   \]
 
 - **R² Score (Coefficient of Determination):**  
-  Mengukur seberapa baik variansi data dapat dijelaskan oleh model. Nilai R² berkisar antara 0 hingga 1, semakin mendekati 1 semakin baik.  
-  Formula:  
+  Mengukur proporsi variansi data yang dapat dijelaskan oleh model.  
   \[
   R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
   \]
 
-Ketiga metrik ini digunakan untuk memberikan gambaran menyeluruh mengenai akurasi dan keandalan model prediksi yang dibangun.
+## Kesimpulan
+- Model machine learning mampu memprediksi nilai matematika siswa dengan baik, dengan R² hingga 0.88.
+- Fitur literasi (`reading score`, `writing score`) terbukti sangat berpengaruh terhadap nilai matematika.
+- Random Forest Regressor dipilih sebagai model akhir untuk proyek ini.
 
-
-# Kesimpulan
-- Model machine learning mampu memprediksi nilai matematika dengan cukup baik (R² hingga 0.88).
-- Fitur literasi (membaca dan menulis) adalah prediktor paling kuat.
-- Hasil ini dapat digunakan sebagai dasar intervensi pendidikan berbasis data.
-
-# Referensi
-- https://www.kaggle.com/datasets/spscientist/students-performance-in-exams  
-- Dokumentasi Scikit-Learn  
+## Referensi
+- [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams)
+- Dokumentasi Scikit-Learn
