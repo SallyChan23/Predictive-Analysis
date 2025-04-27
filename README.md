@@ -33,10 +33,20 @@ Tidak terdapat missing value maupun duplikat pada dataset.
 - **Feature Scaling**: Dilakukan StandardScaler pada fitur numerik untuk optimasi performa model berbasis regresi.
 - **Train-Test Split**: Data dibagi menjadi 80% data pelatihan dan 20% data pengujian.
 
-# Modeling
-Dua model yang digunakan:
-- **Linear Regression** sebagai baseline model.
-- **Random Forest Regressor**, kemudian dilakukan **GridSearchCV** untuk tuning hyperparameter.
+---
+
+## Solution Statement
+
+Untuk mencapai hasil prediksi yang optimal, proyek ini menggunakan dua pendekatan model:
+
+1. **Baseline Model: Linear Regression**  
+   Model sederhana digunakan sebagai acuan awal performa prediksi.
+
+2. **Random Forest Regressor dengan Hyperparameter Tuning**  
+   Model ensembel yang memperbaiki performa prediksi dengan menggabungkan banyak pohon keputusan.
+
+Semua model dievaluasi menggunakan metrik MAE, RMSE, dan R² Score untuk memilih model terbaik.
+
 
 # Evaluation
 
@@ -55,6 +65,46 @@ Fitur `reading score` dan `writing score` memiliki feature importance tertinggi,
 
 ![image](https://github.com/user-attachments/assets/e093f823-5d07-4fd6-8cd1-4634577a99cf)
 > Dari hasil visualisasi tersebut, dapat ditunjukkan bahwa reading score serta writing score memiliki kontribusi tinggi dalam nilai matematika
+
+## Evaluation Metrics Explanation
+
+Model dievaluasi menggunakan tiga metrik utama:
+
+- **Mean Absolute Error (MAE):**  
+  Mengukur rata-rata absolut selisih antara nilai aktual dan nilai prediksi.  
+  Formula:  
+  \[
+  MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+  \]  
+  Semakin kecil MAE, semakin baik performa model.
+
+- **Root Mean Squared Error (RMSE):**  
+  Menghitung akar dari rata-rata kuadrat error. Lebih sensitif terhadap outlier dibandingkan MAE.  
+  Formula:  
+  \[
+  RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+  \]
+
+- **R² Score (Coefficient of Determination):**  
+  Mengukur seberapa baik variansi data dapat dijelaskan oleh model. Nilai R² berkisar antara 0 hingga 1, semakin mendekati 1 semakin baik.  
+  Formula:  
+  \[
+  R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
+  \]
+
+Ketiga metrik ini digunakan untuk memberikan gambaran menyeluruh mengenai akurasi dan keandalan model prediksi yang dibangun.
+
+## Model Selection
+
+Berdasarkan hasil evaluasi yang telah dilakukan, **Random Forest Regressor** dipilih sebagai model terbaik karena:
+
+- **MAE** dan **RMSE** yang dihasilkan lebih rendah dibandingkan Linear Regression.
+- **R² Score** dari Random Forest cukup tinggi dan stabil, menandakan model mampu menjelaskan variansi data dengan baik.
+- Random Forest juga memiliki keunggulan dalam menangani hubungan non-linear antar fitur.
+
+Dengan mempertimbangkan hasil evaluasi metrik, **Random Forest Regressor** menjadi model final yang digunakan dalam proyek ini.
+
+
 
 
 # Kesimpulan
