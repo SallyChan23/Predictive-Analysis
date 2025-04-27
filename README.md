@@ -56,15 +56,27 @@ Semua model dievaluasi menggunakan metrik MAE, RMSE, dan R² Score untuk memilih
 | Random Forest         | 4.71  | 6.06  | 0.85 |
 | Tuned Random Forest   | 4.69  | 6.04  | 0.85 |
 
-Visualisasi hasil prediksi vs aktual menunjukkan sebagian besar titik mendekati garis ideal.  
-Fitur `reading score` dan `writing score` memiliki feature importance tertinggi, menunjukkan literasi siswa sangat berpengaruh pada kemampuan numerik.
+> Dari kedua model ini, akan dipilih Random Forest algorithm, karena hasil evaluasi menunjukkan angka lebih baik dibanding Linear Regression
+> Dari hasil tersebut dengan adanya tuning menjadi lebih baik, walau hanya sedikit. Dapat ditunjukkan dari hasil RMSE nya dari 6.06 menjadi 6.04
+
+## Model Selection
+
+Berdasarkan hasil evaluasi yang telah dilakukan, **Random Forest Regressor** dipilih sebagai model terbaik karena:
+
+- **MAE** dan **RMSE** yang dihasilkan lebih rendah dibandingkan Linear Regression.
+- **R² Score** dari Random Forest cukup tinggi dan stabil, menandakan model mampu menjelaskan variansi data dengan baik.
+- Random Forest juga memiliki keunggulan dalam menangani hubungan non-linear antar fitur.
+
+Dengan mempertimbangkan hasil evaluasi metrik, **Random Forest Regressor** menjadi model final yang digunakan dalam proyek ini.
+
+**Hasil Visualisasi dengan Scatter Plot (Menggunakan Random Forest Setelah Tuning**
 
 ![image](https://github.com/user-attachments/assets/51c97a42-3c1f-4bf6-b3b5-066406123c71)
 
 > Hasil scatter plot menunjukkan model dapat mempredeksi nilai matematika dengan cukup baik ditunjukkan oleh titik yang berada pada garis merah dan hanya beberapa titik saja yang diluar dari garis merah tersebut (ini bisa disebabkan oleh outliers).
 
 ![image](https://github.com/user-attachments/assets/e093f823-5d07-4fd6-8cd1-4634577a99cf)
-> Dari hasil visualisasi tersebut, dapat ditunjukkan bahwa reading score serta writing score memiliki kontribusi tinggi dalam nilai matematika
+> Dari hasil visualisasi tersebut, fitur `reading score` dan `writing score` memiliki feature importance tertinggi, menunjukkan literasi siswa sangat berpengaruh pada kemampuan numerik.
 
 ## Evaluation Metrics Explanation
 
@@ -93,18 +105,6 @@ Model dievaluasi menggunakan tiga metrik utama:
   \]
 
 Ketiga metrik ini digunakan untuk memberikan gambaran menyeluruh mengenai akurasi dan keandalan model prediksi yang dibangun.
-
-## Model Selection
-
-Berdasarkan hasil evaluasi yang telah dilakukan, **Random Forest Regressor** dipilih sebagai model terbaik karena:
-
-- **MAE** dan **RMSE** yang dihasilkan lebih rendah dibandingkan Linear Regression.
-- **R² Score** dari Random Forest cukup tinggi dan stabil, menandakan model mampu menjelaskan variansi data dengan baik.
-- Random Forest juga memiliki keunggulan dalam menangani hubungan non-linear antar fitur.
-
-Dengan mempertimbangkan hasil evaluasi metrik, **Random Forest Regressor** menjadi model final yang digunakan dalam proyek ini.
-
-
 
 
 # Kesimpulan
