@@ -39,11 +39,22 @@ Catatan tambahan:
 - **Encoding**: Semua fitur kategorikal diubah menjadi numerik menggunakan LabelEncoder.
 - **Feature Scaling**: Dilakukan StandardScaler pada fitur numerik untuk optimasi performa model berbasis regresi.
 - **Train-Test Split**: Data dibagi menjadi 80% data pelatihan dan 20% data pengujian.
+- Alasan dilakukan feature scaling adalah karena beberapa algoritma machine learning, seperti Linear Regression, sensitif terhadap skala fitur. Dengan melakukan scaling, semua fitur akan berada pada rentang nilai yang seragam, sehingga model dapat berlatih lebih optimal dan menghindari bias terhadap fitur dengan skala yang lebih besar.
 
 ## Modeling
 Dua model yang digunakan:
 - **Linear Regression** sebagai baseline model.
 - **Random Forest Regressor** dengan **GridSearchCV** untuk hyperparameter tuning.
+
+### Kelebihan dan Kekurangan Model
+
+- **Linear Regression**:  
+  + Kelebihan: Sederhana, interpretasi koefisien fitur mudah.  
+  + Kekurangan: Hanya mampu menangkap hubungan linear antar fitur, performa menurun jika ada hubungan non-linear.
+
+- **Random Forest Regressor**:  
+  + Kelebihan: Mampu menangkap hubungan non-linear dan interaksi antar fitur secara otomatis, lebih tahan terhadap overfitting dibanding model single tree.  
+  + Kekurangan: Interpretasi hasil model lebih sulit dibanding Linear Regression, serta membutuhkan waktu komputasi lebih lama untuk training.
 
 ### Model Selection
 Berdasarkan hasil evaluasi, **Random Forest Regressor** dipilih sebagai model terbaik karena:
