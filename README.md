@@ -1,7 +1,7 @@
 # Laporan Proyek Machine Learning - Jeselyn Tania
 
 ## Domain Proyek
-Kemampuan numerasi merupakan indikator penting dalam pendidikan. Nilai matematika menjadi salah satu tolok ukur utama untuk menilai prestasi akademik siswa. Banyak faktor yang dapat memengaruhi hasil nilai matematika, mulai dari kemampuan literasi hingga latar belakang sosial. Dengan menerapkan machine learning, kita dapat memprediksi nilai matematika siswa berdasarkan faktor-faktor tersebut dan memahami hubungan antar fitur yang memengaruhi performa akademik.
+Kemampuan numerasi merupakan indikator penting dalam pendidikan. Nilai matematika menjadi salah satu tolak ukur utama untuk menilai prestasi akademik siswa. Banyak faktor yang dapat memengaruhi hasil nilai matematika, mulai dari kemampuan literasi hingga latar belakang sosial. Dengan menerapkan machine learning, kita dapat memprediksi nilai matematika siswa berdasarkan faktor-faktor tersebut dan memahami hubungan antar fitur yang memengaruhi performa akademik.
 
 Referensi:
 - [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams)
