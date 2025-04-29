@@ -3,8 +3,11 @@
 ## Domain Proyek
 Kemampuan numerasi merupakan indikator penting dalam pendidikan. Nilai matematika menjadi salah satu tolak ukur utama untuk menilai prestasi akademik siswa. Banyak faktor yang dapat memengaruhi hasil nilai matematika, mulai dari kemampuan literasi hingga latar belakang sosial. Dengan menerapkan machine learning, kita dapat memprediksi nilai matematika siswa berdasarkan faktor-faktor tersebut dan memahami hubungan antar fitur yang memengaruhi performa akademik.
 
+Berdasarkan studi yang dilakukan oleh OECD (2019) dalam Programme for International Student Assessment (PISA), kemampuan literasi numerasi siswa berhubungan erat dengan performa akademik dan peluang sosial ekonomi di masa depan. Dengan menggunakan machine learning, diharapkan dapat ditemukan pola-pola dalam data akademik yang membantu memprediksi nilai matematika siswa secara lebih cepat dan akurat, sehingga pihak sekolah dapat mengambil langkah intervensi yang lebih awal.
+
 Referensi:
-- [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams)
+- S. G. Paris and H. M. Paris, “Classroom Applications of Research on Self-Regulated Learning,” Educational Psychologist, vol. 36, no. 2, pp. 89–101, 2001. [DOI Link](https://doi.org/10.1207/S15326985EP3602_4)
+
 
 ## Business Understanding
 
@@ -22,29 +25,83 @@ Referensi:
 - Model dievaluasi menggunakan MAE, RMSE, dan R² Score untuk menentukan model terbaik.
 
 ## Data Understanding
-Dataset digunakan dari Kaggle: [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams), berisi data 1000 siswa dengan fitur:
-- gender
-- race/ethnicity
-- parental level of education
-- lunch
-- test preparation course
-- reading score
-- writing score
-- math score (target)
+Pada bagian ini, akan dijelaskan informasi mengenai data yang digunakan dalam proyek machine learning ini. Data yang digunakan berasal dari sumber terbuka dan berisi informasi performa akademik siswa berdasarkan berbagai faktor seperti jenis kelamin, etnis, latar belakang pendidikan orang tua, status makan siang, serta nilai ujian membaca dan menulis. Tujuan utama dari pemahaman data ini adalah untuk memahami struktur, kondisi, dan karakteristik fitur-fitur dalam dataset sebelum dilakukan pemrosesan dan pemodelan lebih lanjut.
 
-Catatan tambahan:
-- Tidak terdapat missing value maupun duplikat pada dataset.
+### Sumber Data
+Dataset diambil dari Kaggle: [Students Performance in Exams](https://www.kaggle.com/datasets/spscientist/students-performance-in-exams)
+
+### Variable-variable pada students performance in exams dataset adalah sebagai berikut:
+- **gender**: Jenis kelamin siswa (male/female).
+- **race/ethnicity**: Kelompok etnis siswa.
+- **parental level of education**: Tingkat pendidikan tertinggi dari orang tua/wali siswa.
+- **lunch**: Status makan siang siswa (standard atau free/reduced).
+- **test preparation course**: Status apakah siswa mengikuti program persiapan ujian.
+- **reading score**: Skor ujian membaca siswa.
+- **writing score**: Skor ujian menulis siswa.
+- **math score**: Skor ujian matematika siswa (target prediksi).
+
+### Jumlah Data
+Dataset ini terdiri dari 1000 baris (observasi) dan 8 kolom (fitur).
+
+### Kondisi Data
+- **Missing Value**: Tidak terdapat missing value pada dataset.
+- **Data Duplikat**: Tidak terdapat data duplikat.
+- **Outlier**: Dataset tidak dilakukan penanganan khusus terhadap outlier karena data nilai ujian masih berada dalam rentang yang wajar (0-100).
+
+### Exploratory Data Analysis (EDA)
+- Sebagai bagian dari tahap pemahaman data, dilakukan eksplorasi awal terhadap dataset menggunakan fungsi deskriptif dasar. Beberapa fungsi seperti `df.info()`, `df.describe()`, dan pengecekan nilai kosong maupun duplikat digunakan untuk memahami struktur data, tipe data tiap fitur, serta distribusi nilai awal. Tahapan ini bertujuan untuk memastikan kualitas data sebelum dilakukan preprocessing dan pemodelan.
 
 ## Data Preparation
-- **Encoding**: Semua fitur kategorikal diubah menjadi numerik menggunakan LabelEncoder.
-- **Feature Scaling**: Dilakukan StandardScaler pada fitur numerik untuk optimasi performa model berbasis regresi.
-- **Train-Test Split**: Data dibagi menjadi 80% data pelatihan dan 20% data pengujian.
-- Alasan dilakukan feature scaling adalah karena beberapa algoritma machine learning, seperti Linear Regression, sensitif terhadap skala fitur. Dengan melakukan scaling, semua fitur akan berada pada rentang nilai yang seragam, sehingga model dapat berlatih lebih optimal dan menghindari bias terhadap fitur dengan skala yang lebih besar.
+
+Tahap data preparation dilakukan untuk mempersiapkan data agar dapat digunakan oleh model machine learning dengan optimal. Berikut tahapan-tahapan yang dilakukan:
+
+### 1. Encoding
+
+Beberapa fitur pada dataset masih dalam bentuk kategorikal seperti `gender`, `race/ethnicity`, `parental level of education`, `lunch`, dan `test preparation course`. Fitur-fitur ini diubah menjadi format numerik menggunakan teknik **Label Encoding**, agar dapat diproses oleh algoritma machine learning yang hanya menerima input numerik.
+
+### 2. Feature Scaling
+
+Fitur numerik pada dataset seperti `reading score` dan `writing score` memiliki rentang nilai yang berbeda. Oleh karena itu, dilakukan **normalisasi/standardisasi** menggunakan `StandardScaler` dari Scikit-Learn.  
+Scaling ini bertujuan untuk menstandarkan fitur dengan cara mengubah distribusi menjadi memiliki rata-rata 0 dan standar deviasi 1.
+
+**Alasan Scaling:**  
+Scaling diperlukan karena beberapa algoritma seperti **Linear Regression** sensitif terhadap perbedaan skala antar fitur. Tanpa scaling, fitur dengan skala besar dapat mendominasi proses pelatihan dan menyebabkan bias dalam prediksi. Dengan scaling, semua fitur diberi perlakuan yang adil.
+
+### 3. Train-Test Split
+
+Dataset dibagi menjadi dua bagian:
+- **Training set (80%)** digunakan untuk melatih model
+- **Testing set (20%)** digunakan untuk mengevaluasi performa model terhadap data yang belum pernah dilihat sebelumnya.
+
+Pembagian dilakukan secara acak dengan menggunakan fungsi `train_test_split` dari Scikit-Learn, dengan seed `random_state=42` untuk hasil yang reprodusibel.
 
 ## Modeling
 Dua model yang digunakan:
 - **Linear Regression** sebagai baseline model.
 - **Random Forest Regressor** dengan **GridSearchCV** untuk hyperparameter tuning.
+
+### Model 1: Linear Regression
+
+**Cara Kerja**:  
+Linear Regression merupakan algoritma supervised learning yang digunakan untuk memprediksi nilai kontinu. Model ini berusaha menemukan garis lurus terbaik yang meminimalkan jumlah kuadrat error antara nilai prediksi dan nilai aktual. Prediksi dihitung dengan persamaan:
+\[
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_nx_n
+\]
+
+**Parameter**:  
+- Menggunakan parameter default dari `LinearRegression` pada scikit-learn.
+
+---
+
+### Model 2: Random Forest Regressor
+
+**Cara Kerja**:  
+Random Forest Regressor adalah algoritma ensemble learning yang menggabungkan banyak decision tree. Setiap tree dilatih dengan subset data berbeda (bootstrap sampling), dan hasil prediksi adalah rata-rata dari semua tree. Ini membantu mengurangi overfitting dan meningkatkan akurasi.
+
+**Parameter**:
+- `n_estimators`: 100 (sebelum tuning), dioptimasi hingga 200 setelah GridSearchCV.
+- `max_depth`: None (default) dan dioptimasi menjadi 10/20 pada tuning.
+- `min_samples_split` dan `min_samples_leaf` diatur pada tuning.
 
 ### Kelebihan dan Kekurangan Model
 
