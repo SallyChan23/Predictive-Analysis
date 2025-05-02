@@ -55,11 +55,15 @@ Dataset ini terdiri dari 1000 baris (observasi) dan 8 kolom (fitur).
 
 Tahap data preparation dilakukan untuk mempersiapkan data agar dapat digunakan oleh model machine learning dengan optimal. Berikut tahapan-tahapan yang dilakukan:
 
-### 1. Encoding
+### 1. Pemisahan Fitur dan Target
+
+Langkah awal sebelum melakukan preprocessing adalah memisahkan data menjadi fitur (X) dan target (y). Kolom `math score` digunakan sebagai target karena merupakan nilai yang ingin diprediksi, sementara kolom lainnya digunakan sebagai fitur. Tahapan ini penting untuk membedakan variabel input dan output dalam pemodelan machine learning.
+
+### 2. Encoding
 
 Beberapa fitur pada dataset masih dalam bentuk kategorikal seperti `gender`, `race/ethnicity`, `parental level of education`, `lunch`, dan `test preparation course`. Fitur-fitur ini diubah menjadi format numerik menggunakan teknik **Label Encoding**, agar dapat diproses oleh algoritma machine learning yang hanya menerima input numerik.
 
-### 2. Feature Scaling
+### 3. Feature Scaling
 
 Fitur numerik pada dataset seperti `reading score` dan `writing score` memiliki rentang nilai yang berbeda. Oleh karena itu, dilakukan **normalisasi/standardisasi** menggunakan `StandardScaler` dari Scikit-Learn.  
 Scaling ini bertujuan untuk menstandarkan fitur dengan cara mengubah distribusi menjadi memiliki rata-rata 0 dan standar deviasi 1.
@@ -67,7 +71,7 @@ Scaling ini bertujuan untuk menstandarkan fitur dengan cara mengubah distribusi 
 **Alasan Scaling:**  
 Scaling diperlukan karena beberapa algoritma seperti **Linear Regression** sensitif terhadap perbedaan skala antar fitur. Tanpa scaling, fitur dengan skala besar dapat mendominasi proses pelatihan dan menyebabkan bias dalam prediksi. Dengan scaling, semua fitur diberi perlakuan yang adil.
 
-### 3. Train-Test Split
+### 4. Train-Test Split
 
 Dataset dibagi menjadi dua bagian:
 - **Training set (80%)** digunakan untuk melatih model
