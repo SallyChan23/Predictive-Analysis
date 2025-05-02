@@ -88,9 +88,7 @@ Dua model yang digunakan:
 
 **Cara Kerja**:  
 Linear Regression merupakan algoritma supervised learning yang digunakan untuk memprediksi nilai kontinu. Model ini berusaha menemukan garis lurus terbaik yang meminimalkan jumlah kuadrat error antara nilai prediksi dan nilai aktual. Prediksi dihitung dengan persamaan:
-\[
-y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_nx_n
-\]
+**y = β₀ + β₁x₁ + β₂x₂ + ⋯ + βₙxₙ**
 
 **Parameter**:  
 - Menggunakan parameter default dari `LinearRegression` pada scikit-learn.
@@ -151,21 +149,16 @@ Berdasarkan hasil evaluasi, **Random Forest Regressor** dipilih sebagai model te
 
 - **Mean Absolute Error (MAE):**  
   Mengukur rata-rata absolut selisih antara nilai aktual dan nilai prediksi.  
-  \[
-  MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
-  \]
+ **MAE = (1/n) × Σ |yᵢ − ŷᵢ|**
 
 - **Root Mean Squared Error (RMSE):**  
   Menghitung akar dari rata-rata kuadrat error.  
-  \[
-  RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-  \]
+ **RMSE = √[(1/n) × Σ (yᵢ − ŷᵢ)²]**
+
 
 - **R² Score (Coefficient of Determination):**  
   Mengukur proporsi variansi data yang dapat dijelaskan oleh model.  
-  \[
-  R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
-  \]
+  **R² = 1 − (Σ (yᵢ − ŷᵢ)²) / (Σ (yᵢ − ȳ)²)**
 
 ## Kesimpulan
 - Model machine learning mampu memprediksi nilai matematika siswa dengan baik, dengan R² hingga 0.88.
